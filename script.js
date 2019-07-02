@@ -25,8 +25,8 @@ deposit = confirm('Есть ли у вас депозит в банке?');
 
 let monthExpenseName1 = prompt('Какие обязательные ежемесячные расходы у вас есть?', 'Internet');
 let monthExpenseSum1 = +prompt('Во сколько это обойдется?', 100);
-let monthExpenseName2 = prompt('Какие обязательные ежемесячные расходы у вас есть?', 'Phone');;
-let monthExpenseSum2 = +prompt('Во сколько это обойдется?', 250);;
+let monthExpenseName2 = prompt('Какие обязательные ежемесячные расходы у вас есть?', 'Phone');
+let monthExpenseSum2 = +prompt('Во сколько это обойдется?', 250);
 
 let budgetMonth = money - monthExpenseSum1 - monthExpenseSum2;
 
