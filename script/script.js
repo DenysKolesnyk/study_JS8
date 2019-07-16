@@ -1,42 +1,46 @@
 'use strict';
-// Получить кнопку "Рассчитать" через id
-let calcButton = document.querySelector('#start');
-let resetButton = document.querySelector('#cancel');
 
-// Получить кнопки “+” (плюс) через Tag, каждую в своей переменной. 
-let plusIncome = document.getElementsByTagName('button')[0];
-let plusExpenses = document.getElementsByTagName('button')[1];
+const calcButton = document.querySelector('#start'),
+    resetButton = document.querySelector('#cancel'),
 
-// получить чекбокс по id через querySelector
 
-let checkDeposit = document.getElementById('deposit-check');
+    plusIncome = document.getElementsByTagName('button')[0],
+    plusExpenses = document.getElementsByTagName('button')[1],
 
-// Получить поля для ввода возможных доходов (additional_income-item) при помощи querySelectorAll
+    checkDeposit = document.getElementById('deposit-check'),
 
-let incomeInput = document.querySelectorAll('.additional_income-item');
+    incomeInput = document.querySelectorAll('.additional_income-item'),
 
-let budgetDayBlocks = document.getElementsByClassName('budget_day-value')[0];
-let budgetMonthBlocks = document.getElementsByClassName('budget_month-value')[0];
-let expensesMonthBlocks = document.getElementsByClassName('expenses_month-value')[0];
-let accumulatedMonthBlocks = document.getElementsByClassName('accumulated_month-value')[0];
-let additionalIncomelocks = document.getElementsByClassName('additional_income-value')[0];
-let additionalExpensesBlocks = document.getElementsByClassName('additional_expenses-value')[0];
-let incomePeriodBlocks = document.getElementsByClassName('income_period-value')[0];
-let targetMonthBlocks = document.getElementsByClassName('target_month-value')[0];
-let salaryAmount = document.querySelector('.salary-amount'); 
-let incomeTitle = document.querySelector('.income-title ');
-let expensesTitle = document.querySelector('.expenses-title');
-let expensesItems = document.querySelectorAll('.expenses-items');
-let additionalExpensesItem = document.querySelector('.additional_expenses-item');
-let periodSelect = document.querySelector('.period-select');
-let targetAmount = document.querySelector('.target-amount');
-let incomeItems = document.querySelectorAll('.income-items');
-let periodAmount = document.querySelector('.period-amount');
-let allInputText = document.querySelectorAll('.data input[type=text');
+    budgetDayBlocks = document.getElementsByClassName('budget_day-value')[0],
+    budgetMonthBlocks = document.getElementsByClassName('budget_month-value')[0],
+    expensesMonthBlocks = document.getElementsByClassName('expenses_month-value')[0],
+    accumulatedMonthBlocks = document.getElementsByClassName('accumulated_month-value')[0],
+    additionalIncomelocks = document.getElementsByClassName('additional_income-value')[0],
+    additionalExpensesBlocks = document.getElementsByClassName('additional_expenses-value')[0],
+    incomePeriodBlocks = document.getElementsByClassName('income_period-value')[0],
+    targetMonthBlocks = document.getElementsByClassName('target_month-value')[0],
+    salaryAmount = document.querySelector('.salary-amount'),
+    incomeTitle = document.querySelector('.income-title '),
+    expensesTitle = document.querySelector('.expenses-title'),
+    expensesItems = document.querySelectorAll('.expenses-items'),
+    additionalExpensesItem = document.querySelector('.additional_expenses-item'),
+    periodSelect = document.querySelector('.period-select'),
+    targetAmount = document.querySelector('.target-amount'),
+    incomeItems = document.querySelectorAll('.income-items'),
+    periodAmount = document.querySelector('.period-amount'),
+    allInputText = document.querySelectorAll('.data input[type=text'),
 
-let allInput = document.querySelectorAll('input[type=text');
+    allInput = document.querySelectorAll('input[type=text'),
 
-let appData = {
+    depositBank = document.querySelector('.deposit-bank'),
+    depositAmount = document.querySelector('.deposit-amount'),
+    depositPercent = document.querySelector('.deposit-percent');
+
+
+
+
+
+const appData = {
     budget: 0,
     income: {},
     incomeMonth: 0,
@@ -50,8 +54,6 @@ let appData = {
     budgetMonth: 0,
     expensesMonth: 0,
 
-
-
     start: function(){
     
     if(salaryAmount.value ==''){
@@ -61,15 +63,15 @@ let appData = {
 
     appData.budget = +salaryAmount.value;
 
-    appData.getExpenses();
-    appData.getIncome();
-    appData.getExpensesMonth();
-    
-    appData.getAddExpenses();
-    appData.getAddIncome();
-    appData.getBudget();
-    appData.showResult();
-    appData.blockInput();
+    this.getExpenses();
+    this.getIncome();
+    this.getExpensesMonth();
+    this.getInfoDeposit();
+    this.getAddExpenses();
+    this.getAddIncome();
+    this.getBudget();
+    this.showResult();
+    this.blockInput();
     },
 
     blockInput: function(){
@@ -86,9 +88,11 @@ let appData = {
         allInputText.forEach(function(i){
             i.disabled = false;
             i.value = '';
-        }, allInput.forEach(function(item){
+        }, 
+        allInput.forEach(function(item){
             item.value = '';
         }));
+
         plusIncome.style.display = 'block';
         plusExpenses.style.display = 'block';
         start.style.display = 'block';
@@ -154,9 +158,9 @@ let appData = {
 
         })
 
-    for(let key in this.income){
-    this.incomeMonth += +this.income[key];
-}
+        for(let key in this.income){
+        this.incomeMonth += +this.income[key];
+    }
 
     },
 
@@ -187,7 +191,7 @@ let appData = {
     },
 
     getBudget : function(){
-        this.budgetMonth = this.budget +this.incomeMonth - this.expensesMonth;
+        this.budgetMonth = this.budget +this.incomeMonth - this.expensesMonth +(this.moneyDeposit * this.percentDeposit)/12;
         this.budgetDay = Math.floor(this.budgetMonth /30);
     },
 
@@ -214,15 +218,15 @@ let appData = {
     },
 
     getInfoDeposit: function(){
-        this.deposit = confirm('Есть ли у вас депозит в банке?');
+        
         if(this.deposit){
 
             do{
-                this.percentDeposit = prompt('Какой годовой процент?', 10);
+                this.percentDeposit = depositPercent.value;
             }
             while(isNaN(this.percentDeposit) || this.percentDeposit == ' ' || this.percentDeposit == null);
             do{
-                this.moneyDeposit = prompt('Какая сумма вклада?', 7000);
+                this.moneyDeposit = depositAmount.value;
             }
             while(isNaN(this.moneyDeposit) || this.moneyDeposit == ' ' || this.moneyDeposit == null);
         }
@@ -232,6 +236,32 @@ let appData = {
         return this.budgetMonth * periodSelect.value;
     }
 };
+
+
+checkDeposit.addEventListener('change', function(){
+    if(checkDeposit.checked){
+        depositBank.style.display = 'inline-block';
+        depositAmount.style.display = 'inline-block';
+        appData.deposit = 'true';
+        depositBank.addEventListener('change', function(){
+            let selectIndex = this.options[this.selectedIndex].value;
+            if(selectIndex === 'other'){
+                depositPercent.style.display = 'inline-block'; // заблокирован
+                depositPercent.value = '';
+            }else{
+                depositPercent.style.display = 'none';
+                depositPercent.value = selectIndex;
+            }
+        });
+    } else{
+        depositBank.style.display = 'none';
+        depositAmount.style.display = 'none';
+        depositAmount.value = '';
+        appData.deposit = 'false';
+
+    }
+});
+
 
 
 let bindStart = appData.start.bind(appData);
@@ -246,7 +276,3 @@ periodSelect.addEventListener('change', function(){
 });
 
 resetButton.addEventListener('click', appData.unlockInput);
-
-
-// console.log('Все расходы за месяц: ', appData.expensesMonth);
-// console.log('Накопления за месяц ', appData.budgetMonth);
