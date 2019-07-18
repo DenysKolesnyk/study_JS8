@@ -28,7 +28,7 @@ window.addEventListener('DOMContentLoaded', function(){
         let nextNewYears = Math.floor((new Date('1 january 2020') - new Date()) / (1000 * 3600 * 24));
          let daysName; 
 
-        newYear.textContent = 'До Нового года осталось: ' + nextNewYears + ' дней!';       
+        newYear.textContent = `До Нового года осталось: ${nextNewYears} дней!`;
        if(nextNewYears <= 0){
             newYear.textContent = 0 ;
        }
