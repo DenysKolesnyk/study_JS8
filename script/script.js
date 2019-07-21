@@ -42,4 +42,42 @@ window.addEventListener('DOMContentLoaded', function(){
     }
     
     countTimer('30 july 2019');
+
+    //Меню
+    const toggleMenu = () => {
+        const btnMenu = document.querySelector('.menu'),
+            menu = document.querySelector('menu'),
+            closeBtn = document.querySelector('.close-btn'),
+            menuItem = menu.querySelectorAll('ul>li');
+
+        const handlerMenu = () => {
+            menu.classList.toggle('active-menu');
+        };
+
+        btnMenu.addEventListener('click', handlerMenu);
+        closeBtn.addEventListener('click', handlerMenu);
+        menuItem.forEach((e) => e.addEventListener('click', handlerMenu));
+    };
+    toggleMenu();
+
+    //Модальное окно
+
+    const togglePopUP = () => {
+        const popup = document.querySelector('.popup'),
+            popupBtn =document.querySelectorAll('.popup-btn'),
+            popUpClose = document.querySelector('.popup-close');
+        
+        popupBtn.forEach((e) => {
+            e.addEventListener('click', () => {
+                popup.style.display = 'block';
+            });
+        });
+        
+        popUpClose.addEventListener('click', () => {
+            popup.style.display = 'none';
+        });
+    };
+
+    togglePopUP();
+
 });
