@@ -67,9 +67,21 @@ window.addEventListener('DOMContentLoaded', function(){
             popupBtn =document.querySelectorAll('.popup-btn'),
             popUpClose = document.querySelector('.popup-close');
         
+
         popupBtn.forEach((e) => {
             e.addEventListener('click', () => {
                 popup.style.display = 'block';
+                let counter = -50;
+                popup.style.transform = `translateX(-50px)`;
+                
+                   let popAnime = () => {
+                        counter++;
+                        popup.style.transform = `translateX(${counter}px)`;
+                        if(counter < 0){
+                            setTimeout(popAnime, 10);
+                        }
+                    };
+                popAnime();
             });
         });
         
