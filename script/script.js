@@ -132,12 +132,6 @@ window.addEventListener('DOMContentLoaded', function(){
         
         dotUl = document.querySelector('.portfolio-dots');
         
-
-        let newDot = document.createElement('li');
-        newDot.classList.add('dot');
-        dotUl.appendChild(newDot);
-        
-       
         for(let i=0; i < slide.length; i++){
             let newDot = document.createElement('li');
             dotUl.appendChild(newDot);
@@ -232,4 +226,36 @@ window.addEventListener('DOMContentLoaded', function(){
     };
 
     slider();
+
+    // Картинка замена 
+
+    const  imgFlip = document.querySelectorAll('.command__photo');
+   
+    imgFlip.forEach((el) => {
+        el.addEventListener('mouseenter', (e) =>{
+            
+            var target = event.target.src;
+            event.target.src = event.target.dataset.img;
+
+            el.addEventListener('mouseleave', (e) =>{
+                event.target.src = target;
+                        
+             });
+        });
+    }); 
+    
+    // Валидация
+
+    const validNum = document.querySelectorAll('input[type="number"]');
+    
+   
+    validNum.forEach((el) =>{
+        el.addEventListener('input', () => {
+           
+            event.target.value = event.target.value.replace(/\D/g, '');
+            
+        });
+    });
+
+
 });
