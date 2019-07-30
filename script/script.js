@@ -256,6 +256,24 @@ window.addEventListener('DOMContentLoaded', function(){
             
         });
     });
+    
+    const inputName = document.querySelectorAll('#form1-name, #form2-name, #form2-message, #form3-name'),
+        inputPhone = document.querySelectorAll('input[type="tel"]');
+
+
+        inputName.forEach((el) =>{
+            el.addEventListener('input', () =>{
+                event.target.value = event.target.value.match(/[а-яА-ЯёЁ\s]+/g);
+            });
+        });
+
+
+        inputPhone.forEach((el) =>{
+            el.addEventListener('input', () =>{
+                event.target.value = event.target.value.match(/^\+?\d*$/g);
+            });
+        });
+
 
     // калькулятор
 
@@ -304,4 +322,123 @@ window.addEventListener('DOMContentLoaded', function(){
 
     };
     calc();
+
+    // отправка ajax-form
+    
+   
+    const sendForm = () => {
+
+        const errorMessage = 'Что то пошло не так ... ',
+            loadMessage = 'Load',
+            succesMessage = 'Спасибо! Мы скоро с Вами свяжемся';
+        
+        const form = document.getElementById('form1'),
+            formTwo = document.getElementById('form2'),
+            formModal = document.getElementById('form3');
+            
+        const statusMessage = document.createElement('div');
+        
+        statusMessage.style.cssText = 'font-size: 2rem;';
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            form.appendChild(statusMessage);
+            
+            statusMessage.textContent = loadMessage;
+
+            const formData = new FormData(form);
+            
+            let body ={};
+            
+            for (let val of formData.entries()){
+                body[val[0]] = val[1];
+            }
+           postData(body, () => {
+            statusMessage.textContent = succesMessage;
+           }, (error) => {
+            statusMessage.textContent = errorMessage;
+            console.log(error);
+           });
+           clearInput();
+        });
+
+
+        formTwo.addEventListener('submit', (event) => {
+            event.preventDefault();
+            form.appendChild(statusMessage);
+            
+            statusMessage.textContent = loadMessage;
+
+            const formData = new FormData(form);
+            
+            let body ={};
+            
+            for (let val of formData.entries()){
+                body[val[0]] = val[1];
+            }
+           postData(body, () => {
+            statusMessage.textContent = succesMessage;
+           }, (error) => {
+            statusMessage.textContent = errorMessage;
+            console.log(error);
+           });
+           clearInput();
+           
+        });
+
+
+
+        formModal.addEventListener('submit', (event) => {
+            event.preventDefault();
+            form.appendChild(statusMessage);
+            
+            statusMessage.textContent = loadMessage;
+
+            const formData = new FormData(form);
+            
+            let body ={};
+            
+            for (let val of formData.entries()){
+                body[val[0]] = val[1];
+            }
+           postData(body, () => {
+            statusMessage.textContent = succesMessage;
+           }, (error) => {
+            statusMessage.textContent = errorMessage;
+            console.log(error);
+           });
+           clearInput();
+        });
+
+        const postData = (body, outputData, errorData) => {
+            const request = new XMLHttpRequest();
+            
+            request.addEventListener('readystatechange', () =>{
+                
+                if(request.readyState !== 4){
+                    return;
+                }
+
+                if(request.status == 200){
+                    outputData();
+                } else {
+                    errorData(request.status);
+                }
+            });
+
+            request.open('POST', './server.php');
+            request.setRequestHeader('Content-Type', 'application/json');
+            request.send(JSON.stringify(body));
+        }
+
+        const clearInput = () => {
+            const inputAll = document.querySelectorAll('input');
+            
+            inputAll.forEach((el) => {
+                el.value = '';
+            });
+        }
+    };
+
+    sendForm();
 });
