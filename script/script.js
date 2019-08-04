@@ -353,12 +353,7 @@ window.addEventListener('DOMContentLoaded', function(){
             for (let val of formData.entries()){
                 body[val[0]] = val[1];
             }
-           postData(body, () => {
-            statusMessage.textContent = succesMessage;
-           }, (error) => {
-            statusMessage.textContent = errorMessage;
-            console.log(error);
-           });
+           postData(body);
            clearInput();
         });
 
@@ -376,12 +371,7 @@ window.addEventListener('DOMContentLoaded', function(){
             for (let val of formData.entries()){
                 body[val[0]] = val[1];
             }
-           postData(body, () => {
-            statusMessage.textContent = succesMessage;
-           }, (error) => {
-            statusMessage.textContent = errorMessage;
-            console.log(error);
-           });
+            postData(body);
            clearInput();
            
         });
@@ -391,7 +381,7 @@ window.addEventListener('DOMContentLoaded', function(){
         formModal.addEventListener('submit', (event) => {
             event.preventDefault();
             form.appendChild(statusMessage);
-            
+
             statusMessage.textContent = loadMessage;
 
             const formData = new FormData(form);
@@ -401,16 +391,13 @@ window.addEventListener('DOMContentLoaded', function(){
             for (let val of formData.entries()){
                 body[val[0]] = val[1];
             }
-           postData(body, () => {
-            statusMessage.textContent = succesMessage;
-           }, (error) => {
-            statusMessage.textContent = errorMessage;
-            console.log(error);
-           });
+            postData(body);
            clearInput();
         });
 
-        const postData = (body, outputData, errorData) => {
+        const postData = (body) => {
+           return new Promise((resolve, reject) =>{
+
             const request = new XMLHttpRequest();
             
             request.addEventListener('readystatechange', () =>{
@@ -420,16 +407,20 @@ window.addEventListener('DOMContentLoaded', function(){
                 }
 
                 if(request.status == 200){
-                    outputData();
+                    resolve(statusMessage.textContent = succesMessage);
                 } else {
-                    errorData(request.status);
+                    reject(request.status);
                 }
             });
 
             request.open('POST', './server.php');
             request.setRequestHeader('Content-Type', 'application/json');
             request.send(JSON.stringify(body));
-        }
+
+           });
+           
+        };
+
 
         const clearInput = () => {
             const inputAll = document.querySelectorAll('input');
