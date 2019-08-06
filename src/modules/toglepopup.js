@@ -1,10 +1,28 @@
 const togglePopUP = () => {
     const popup = document.querySelector('.popup'),
-        popupBtn =document.querySelectorAll('.popup-btn');
+        popupBtn =document.querySelectorAll('.popup-btn'),
+        popUpContent = document.querySelector('.popup-content');
+    
+
+
+    let count = 0;
+    
+    let popUpAnimate = () =>{
+        count++;
+        popUpContent.style.left = count +'%';
+        if(count < 38){
+            setTimeout(popUpAnimate, 10);
+        }else{
+            count = 0;
+        }
+    };
+
+
 
     popupBtn.forEach((e) => {
         e.addEventListener('click', () => {
             popup.style.display = 'block';
+            popUpAnimate();
             
         });
     });
@@ -23,4 +41,5 @@ const togglePopUP = () => {
         }
     });
 };
+
 export default  togglePopUP;

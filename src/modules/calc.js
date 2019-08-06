@@ -24,7 +24,8 @@ const calc = (price = 100) => {
         }
 
         if(typeValue && squareValue){
-            total = price * typeValue * squareValue * countValue * dayValue;
+            total = Math.floor(price * typeValue * squareValue * countValue * dayValue);
+           
         }
         
         totalValue.textContent = total;
@@ -32,9 +33,6 @@ const calc = (price = 100) => {
 
     calcBlock.addEventListener('change', (event) => {
         const target = event.target;
-        // if(target.matches('.calc-type') || target.matches('.calc-square') ||target.matches('.calc-day') || target.matches('.calc-square')){
-
-        // }
 
         if(target.matches('select') || target.matches('input')){
             countSum();
