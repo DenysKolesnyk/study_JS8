@@ -15,13 +15,29 @@ function countTimer(deadline){
         }
 
         function updateClock(){
+           
             let timer = getTimeRemaining();
 
-            timerHours.textContent = ('0' + timer.hours).slice(-2);
-            timerMinutes.textContent = ('0' + timer.minutes).slice(-2);
-            timerSeconds.textContent = ('0' + timer.seconds).slice(-2);
+            if(timer.hours < 10){
+                timerHours.textContent = ('0' + timer.hours);
+            } else {
+                timerHours.textContent = timer.hours;
 
-            
+            }
+                        
+            if(timer.minutes < 10){
+                timerMinutes.textContent = ('0' + timer.minutes);
+            } else {
+                timerMinutes.textContent = timer.minutes;
+
+            }
+
+            if(timer.seconds < 10){
+                timerSeconds.textContent = ('0' + timer.seconds);
+            } else {
+                timerSeconds.textContent = timer.seconds;
+
+            }
 
             if(timer.timeRemaining > 0){
                 setInterval(updateClock, 1000);

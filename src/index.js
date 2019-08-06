@@ -13,7 +13,7 @@
 
 
    //Таймер
-   countTimer('30 august 2019');
+   countTimer('30 august 2020');
 
     //Меню
     toggleMenu();
