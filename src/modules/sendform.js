@@ -1,7 +1,7 @@
 
 const sendForm = () => {
 
-    const errorMessage = 'Что то пошло не так ... ',
+    const errorMessage = 'Ошибка отправки информации. Повторите еще раз. ',
         loadMessage = 'Отправка информации ...',
         succesMessage = 'Спасибо! Мы скоро с Вами свяжемся';
     
@@ -9,8 +9,6 @@ const sendForm = () => {
 
     const statusMessage = document.createElement('div');
     
-    statusMessage.style.cssText = 'font-size: 2rem;';
-      
 
     form.forEach((el) =>{
         el.addEventListener('submit', (event) => {

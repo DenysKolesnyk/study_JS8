@@ -5,9 +5,9 @@ const popupWindows = () =>{
         popupConsultation = document.querySelector('.popup-consultation'),
         popupDiscount = document.querySelector('.popup-discount'),
         popupCheck = document.querySelector('.popup-check'),
-        btnPopUp = document.querySelectorAll('.consultation-btn, .check-btn, .discount-btn'),
+        popUpCall = document.querySelector('.popup-call'),
+        btnPopUp = document.querySelectorAll('.consultation-btn, .check-btn, .discount-btn, .call-btn'),
         userQuest = document.querySelector('input[name = "user_quest"]');
-        console.log(userQuest.value);
 
     btnPopUp.forEach((e) => {
         e.addEventListener('click', (event) =>{
@@ -18,6 +18,8 @@ const popupWindows = () =>{
                 popupCheck.style.display = 'block';
             } else  if(event.target.classList.contains('discount-btn')){
                 popupDiscount.style.display = 'block';
+            }  else  if(event.target.classList.contains('call-btn')){
+                popUpCall.style.display = 'block';
             }   
         });
     });
