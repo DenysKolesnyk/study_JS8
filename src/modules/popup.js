@@ -19,6 +19,7 @@ const popupWindows = () =>{
             } else  if(event.target.classList.contains('discount-btn')){
                 popupDiscount.style.display = 'block';
             }  else  if(event.target.classList.contains('call-btn')){
+                event.preventDefault();
                 popUpCall.style.display = 'block';
             }   
         });
