@@ -13,6 +13,7 @@ const popupWindows = () =>{
         e.addEventListener('click', (event) =>{
             
             if(event.target.classList.contains('consultation-btn') && userQuest.value !=""){
+                event.preventDefault();
                 popupConsultation.style.display = 'block';
             } else  if(event.target.classList.contains('check-btn')){
                 popupCheck.style.display = 'block';

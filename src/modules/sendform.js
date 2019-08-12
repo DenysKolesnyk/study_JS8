@@ -7,7 +7,8 @@ const sendForm = () => {
     
     const form = document.querySelectorAll('form');
 
-    const statusMessage = document.createElement('div');
+    const statusMessage = document.createElement('div'),
+            userQuest = document.querySelector('input[name = "user_quest"]');
     
 
     form.forEach((el) =>{
@@ -18,6 +19,10 @@ const sendForm = () => {
             statusMessage.textContent = loadMessage;
 
             const formData = new FormData(el);
+            
+            if(userQuest.value !=""){
+                formData.append('user_quest', userQuest.value)
+            }
             
             let body ={};
             
