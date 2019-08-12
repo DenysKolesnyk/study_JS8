@@ -27,7 +27,7 @@ const accordion = () =>{
             let target = event.target;
 
             const panelHeading = el.querySelectorAll('.panel-heading'),
-            panelCollapse = el.querySelectorAll('.panel-collapse');
+                panelCollapse = el.querySelectorAll('.panel-collapse');
 
             target = target.closest('.panel-heading');
             

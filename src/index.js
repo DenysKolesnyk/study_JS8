@@ -6,6 +6,7 @@ import validation from'./modules/validation';
 import more from'./modules/more';
 import accordion from'./modules/accordion';
 import constructor from'./modules/constructor';
+import next from'./modules/next';
 
 window.addEventListener('DOMContentLoaded', function(){
 
@@ -31,5 +32,8 @@ accordion ();
 
 constructor();
 
+//Кнопка следующий шаг
+
+next();
 
 });
