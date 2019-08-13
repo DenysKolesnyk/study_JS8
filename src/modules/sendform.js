@@ -1,4 +1,3 @@
-
 const sendForm = () => {
 
     const errorMessage = 'Ошибка отправки информации. Повторите еще раз. ',
@@ -18,10 +17,12 @@ const sendForm = () => {
             
             statusMessage.textContent = loadMessage;
 
-            const formData = new FormData(el);
+           
+                const formData = new FormData(el);
             
+
             if(userQuest.value !=""){
-                formData.append('user_quest', userQuest.value)
+                formData.append('user_quest', userQuest.value);
             }
             
             let body ={};
@@ -57,6 +58,7 @@ const sendForm = () => {
     };
 
 
+
     const clearInput = () => {
         const inputAll = document.querySelectorAll('input');
         
@@ -65,7 +67,5 @@ const sendForm = () => {
         });
     }
 };
-
-
 
 export default sendForm;

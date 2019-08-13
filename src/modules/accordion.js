@@ -1,16 +1,6 @@
 const accordion = () =>{
-    const 
-    accordion = document.querySelectorAll('#accordion, #accordion-two');
+    const accordion = document.querySelectorAll('#accordion, #accordion-two');
 
-    const openTab = (index, panelHeading, panelCollapse) => {
-        for(let i = 0; i < panelHeading.length; i++){
-            if(index === i){
-                panelCollapse[i].style.display = 'block';
-            }
-        }
-    };
-
-        
     const toggleTab = (index, panelHeading, panelCollapse) => {
         for(let i = 0; i < panelHeading.length; i++){
             if(index === i){
@@ -33,10 +23,7 @@ const accordion = () =>{
             
             if(target){
                 panelHeading.forEach((item, i) =>{
-                    if(item === target && el.id == 'accordion'){
-                        event.preventDefault();
-                        openTab(i, panelHeading, panelCollapse );
-                    }else if(item === target && el.id == 'accordion-two'){
+                    if(item === target){
                         event.preventDefault();
                         toggleTab(i, panelHeading, panelCollapse );
                     }
