@@ -12,14 +12,15 @@ const constructor = () => {
         circleTwo = document.querySelector('.circle-two'),
         meters = document.querySelector('#collapseFour').querySelector('input'),
         accordionBlock = document.querySelector('#accordion');
+
     const calcData = {
             diametrOne: 0,
             diametrTwo: 0,
             circleOne: 0,
             circleTwo: 0,
             meters: 0,
-            chamber: 1,
-            Bottom: 1,
+            chamber: 0,
+            Bottom: 0,
             total: 0
         };
    
@@ -152,10 +153,10 @@ const constructor = () => {
         if(target.matches('select') || target.matches('input')){
             countSum();
         }
+       
     });
-    
-    
-
+     
+    return calcData;
 };
 
 export default constructor;

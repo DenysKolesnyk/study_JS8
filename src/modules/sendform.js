@@ -1,5 +1,5 @@
-const sendForm = () => {
-
+const sendForm = (objConstructor) => {
+    
     const errorMessage = 'Ошибка отправки информации. Повторите еще раз. ',
         loadMessage = 'Отправка информации ...',
         succesMessage = 'Спасибо! Мы скоро с Вами свяжемся';
@@ -12,19 +12,24 @@ const sendForm = () => {
 
     form.forEach((el) =>{
         el.addEventListener('submit', (event) => {
+            
             event.preventDefault();
             el.appendChild(statusMessage);
-            
+                                    
             statusMessage.textContent = loadMessage;
-
            
-                const formData = new FormData(el);
-            
+            const formData = new FormData(el);
 
             if(userQuest.value !=""){
                 formData.append('user_quest', userQuest.value);
             }
-            
+
+            if(objConstructor.chamber != 0){
+                Object.keys(objConstructor).forEach((item) =>{
+                    formData.append(item, objConstructor[item]);
+                });
+            }
+
             let body ={};
             
             for (let val of formData.entries()){
@@ -53,11 +58,7 @@ const sendForm = () => {
             },
             body: JSON.stringify(body)
        });
-    
-       
     };
-
-
 
     const clearInput = () => {
         const inputAll = document.querySelectorAll('input');
@@ -65,7 +66,7 @@ const sendForm = () => {
         inputAll.forEach((el) => {
             el.value = '';
         });
-    }
+    };
 };
 
 export default sendForm;

@@ -14,7 +14,7 @@ window.addEventListener('DOMContentLoaded', function(){
 popupWindows();
 
 // Отправка формы
-sendForm();
+sendForm(constructor());
 
 // Валидация телефона
 
